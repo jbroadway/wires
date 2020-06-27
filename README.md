@@ -9,6 +9,16 @@ providing a few interesting features:
 * Converts Elefant's `{{var}}` tags to Alpine.js `<span x-text="var">` tags
 * Provides automatic server-side callbacks via a handful of custom template tags
 
+## Installation
+
+Via composer:
+
+```bash
+composer require elefant/app-wires
+```
+
+## Usage
+
 Here's how it works:
 
 In your handler (`apps/myapp/handlers/demo.php`):
@@ -16,9 +26,10 @@ In your handler (`apps/myapp/handlers/demo.php`):
 ```php
 <?php
 
-Wires::init ($this); // Inject the controller object
+// Initialize and inject the controller
+Wires::init ($this);
 
-// Set your default values
+// Set your default values here
 $defaults = [
 	'fname' => 'First',
 	'lname' => 'Last
@@ -89,3 +100,7 @@ Can be connected like this:
 ```
 
 Modifying the list on either the client or the server will update the displayed list of elements.
+
+## Demo
+
+Once you've installed this app, go to `/wires/demo` and log in as a site administrator to see a working demo.
