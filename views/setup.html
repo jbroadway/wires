@@ -11,6 +11,7 @@ function _wire_{{c|none}} () {
 			switch (event.target.tagName) {
 				case 'INPUT':
 				case 'SELECT':
+				case 'TEXTAREA':
 					params.append (event.target.getAttribute ('name'), event.target.value);
 					break;
 
