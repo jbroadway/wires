@@ -32,7 +32,7 @@ Wires::init ($this);
 // Set your default values here
 $defaults = [
 	'fname' => 'First',
-	'lname' => 'Last
+	'lname' => 'Last'
 ];
 
 // Handle the request, providing an API callback handler
