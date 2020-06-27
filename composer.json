@@ -2,7 +2,7 @@
     "name": "elefant/app-wires",
     "type": "elefant-app",
     "description": "Wires app for the Elefant CMS auto-connects Alpine.js for easier single-page app development",
-    "keywords": ["api", "rest", "restful", "wires", "endpoint", "spa", "ssr", "server-side rendering", "single-page application", "alpine", "alpine.js", "laravel-livewire"],
+    "keywords": ["api", "rest", "restful", "wires", "endpoint", "spa", "ssr", "server-side rendering", "single-page application", "alpine", "alpinejs", "alpine.js", "laravel-livewire", "livewire"],
     "license": "MIT",
     "version": "0.1-beta",
 	"authors": [
