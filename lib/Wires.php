@@ -103,7 +103,7 @@ class Wires {
 	 * the API endpoint handler, depending on how the request was made.
 	 */
 	public static function handle (array $defaults, callable $handler) : string {
-		$params = array_merge ($defaults, self::$is_wired ? $_POST : self::$controller->data);
+		$params = self::$is_wired ? array_merge ($defaults, self::$controller->get_put_data ()) : $defaults;
 		
 		if (self::$is_wired) {
 			$res = $handler ($params);
@@ -146,11 +146,13 @@ class Wires {
 		switch ($label) {
 			case '_wire_':
 				return 'x-data="_wire_' . self::$c . '()"';
+			case '_wire_data_':
+				return '_wire_' . self::$c . '()';
 			case '_wire_input_':
-				return 'x-on:input.debounce="send($event)"';
+				return 'x-on:input.debounce="handle($event)"';
 			case '_wire_button_':
 			case '_wire_link_':
-				return 'x-on:click="send($event)"';
+				return 'x-on:click="handle($event)"';
 			default:
 				return '<span x-text="' . $label . '">' . Template::sanitize ($val, $charset, $label) . '</span>';
 		}

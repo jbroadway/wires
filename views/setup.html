@@ -3,28 +3,61 @@ var _wire_data_{{c|none}} = {{state|json_encode}};
 
 function _wire_{{c|none}} () {
 	return Object.assign ({}, {
-		send (event) {
+		handle (event) {
 			event.preventDefault ();
 			
-			var params = new FormData ();
+			var params = {};
 			
 			switch (event.target.tagName) {
 				case 'INPUT':
 				case 'SELECT':
 				case 'TEXTAREA':
-					params.append (event.target.getAttribute ('name'), event.target.value);
+					params[event.target.getAttribute ('name')] = event.target.value;
 					break;
 
 				default: // button, a, etc.
 					for (var key in event.target.dataset) {
-						params.append (key, event.target.dataset[key]);
+						params[key] = event.target.dataset[key];
 					}
 					break;
 			}
 			
-			fetch ('/{{endpoint|none}}?_wired_={{c|none}}', {method: 'POST', body: params})
+			this.send (params);
+		},
+		
+		sync () {
+			var params = {};
+			
+			for (var key in this) {
+				if (key[0] == '$') continue;
+				if (key === '__proto__') continue;
+				if (this[key] === undefined) continue;
+				if (this[key] instanceof Function) continue;
+
+				params[key] = (this[key] instanceof Proxy)
+					? this[key]['[[Target]]']
+					: this[key];
+			}
+			console.log (params);
+			//this.send (params);
+		},
+		
+		send (params) {
+			var url = '/{{endpoint|none}}?_wired_={{c|none}}',
+				request = {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify (params)
+				};
+			
+			console.log ('send()', url, request);
+
+			fetch (url, request)
 				.then (res => res.json ())
 				.then (json => {
+					console.log (json);
 					for (var key in json) {
 						this[key] = json[key];
 					}
