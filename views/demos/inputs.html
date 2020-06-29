@@ -1,0 +1,24 @@
+<p><a href="/wires/demos">&laquo; All Demos</a></p>
+
+<div {{_wire_}}>
+	<p><input {{_wire_input_}} type="text" name="name" placeholder="Your name..." /></p>
+
+	<p>{{name}} is {{age}}</p>
+	
+	<p>
+		Set name to:
+		<button {{_wire_button_}} data-name="Alex">Alex</button>
+		<button {{_wire_button_}} data-name="Brenda">Brenda</button>
+		<button {{_wire_button_}} data-name="Steve">Steve</button>
+	</p>
+	
+	<p>
+		Set age to:
+		<button {{_wire_button_}} data-age="18">18</button>
+		<button {{_wire_button_}} data-age="27">27</button>
+		<button {{_wire_button_}} data-age="36">36</button>
+		<button {{_wire_button_}} data-random="1">Random</button>
+	</p>
+	
+	<p><a href="#" {{_wire_link_}} data-name="Joe" data-age="27">Reset name and age</a></p>
+</div>

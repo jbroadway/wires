@@ -2,7 +2,7 @@
 
 // Original Alpine.js demo: https://codepen.io/ryangjchandler/pen/qBOEgjg
 
-$page->window_title = 'To Do List';
+$page->window_title = 'Wires Demo: To Do List';
 $page->layout = 'admin';
 $this->require_admin ();
 

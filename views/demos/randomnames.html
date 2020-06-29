@@ -1,0 +1,24 @@
+<p><a href="/wires/demos">&laquo; All Demos</a></p>
+
+<div x-data="myComponent()">
+	<p x-text="name()" x-show="last_index != -1"></p>
+	<p>
+		<button {{_wire_button_}}>Get Random Name</button>
+		<button @click="clear()">Clear</button>
+	</p>
+</div>
+
+<script>
+function myComponent() {
+	return Object.assign ({{_wire_data_}}, {
+		name() {
+			return this.lname + ', ' + this.fname;
+		},
+		clear() {
+			this.fname = '';
+			this.lname = '';
+			this.last_index = -1;
+		}
+	});
+}
+</script>

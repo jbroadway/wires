@@ -48,13 +48,10 @@ function _wire_{{c|none}} () {
 					},
 					body: JSON.stringify (params)
 				};
-			
-			console.log ('send()', url, request);
 
 			fetch (url, request)
 				.then (res => res.json ())
 				.then (json => {
-					console.log (json);
 					for (var key in json) {
 						this[key] = json[key];
 					}

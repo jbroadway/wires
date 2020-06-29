@@ -149,4 +149,8 @@ function toDoList() {
 
 ## Demos
 
-Once you've installed this app, go to `/wires/demo` and log in as a site administrator to see working demos.
+Once you've installed this app, go to `/wires/demos` in your Elefant CMS installation
+and log in as a site administrator to see some working demos.
+
+You can inspect the source code for the demos under `apps/wires/handlers/demos` and
+`apps/wires/views/demos` in your Elefant CMS installation.
