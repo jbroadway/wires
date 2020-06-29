@@ -26,20 +26,17 @@ function _wire_{{c|none}} () {
 		},
 		
 		sync () {
-			var params = {};
+			var params = {},
+				data = this.$el.__x.getUnobservedData ();
 			
-			for (var key in this) {
-				if (key[0] == '$') continue;
-				if (key === '__proto__') continue;
-				if (this[key] === undefined) continue;
-				if (this[key] instanceof Function) continue;
-
-				params[key] = (this[key] instanceof Proxy)
-					? this[key]['[[Target]]']
-					: this[key];
+			for (var key in data) {
+				if (data[key] === undefined) continue;
+				if (data[key] instanceof Function) continue;
+				
+				params[key] = data[key];
 			}
-			console.log (params);
-			//this.send (params);
+
+			this.send (params);
 		},
 		
 		send (params) {
