@@ -59,7 +59,7 @@ Alternately, you can modify the response data on the server-side before returnin
 ```php
 echo Wires::handle ($defaults, function ($response) {
 	$response['fname'] = 'Jane';
-	$response['lname'] => 'Doe';
+	$response['lname'] = 'Doe';
 	return $response;
 });
 ```
