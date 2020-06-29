@@ -65,7 +65,7 @@ class Wires {
 			self::$controller->page ()->layout = false;
 			self::$is_wired = true;
 		} else {
-			self::$controller->page ()->add_script ('/apps/wires/js/alpine-2.3.5.min.js', 'defer');
+			self::$controller->page ()->add_script ('/apps/wires/js/alpine-2.4.1.min.js', 'defer');
 		}
 	}
 	
