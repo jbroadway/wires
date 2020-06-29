@@ -147,10 +147,26 @@ function toDoList() {
 }
 ```
 
+Using `this.send(params)`, you could also send just the item that changed, which you would
+also need to check for on the server-side.
+
+```js
+function toDoList() {
+	return Object.assign ({{_wire_data_}}, {
+		toggleToDoCompleted(index) {
+			this.todos[index].completed = !this.todos[index].completed;
+			this.send({updated: index, todo: this.todos[index]});
+		}
+	});
+}
+```
+
 ## Demos
 
 Once you've installed this app, go to `/wires/demos` in your Elefant CMS installation
 and log in as a site administrator to see some working demos.
 
-You can inspect the source code for the demos under `apps/wires/handlers/demos` and
-`apps/wires/views/demos` in your Elefant CMS installation.
+You can inspect the source code for the demos under
+[apps/wires/handlers/demos](https://github.com/jbroadway/wires/tree/master/handlers/demos) and
+[apps/wires/views/demos](https://github.com/jbroadway/wires/tree/master/views/demos)
+in your Elefant CMS installation.
