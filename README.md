@@ -21,7 +21,7 @@ composer require elefant/app-wires
 
 Here's how it works:
 
-In your handler (`apps/myapp/handlers/demo.php`):
+In your handler (`apps/myapp/handlers/example.php`):
 
 ```php
 <?php
@@ -41,7 +41,7 @@ echo Wires::handle ($defaults, function ($response) {
 });
 ```
 
-Then in your accompanying view template (`apps/myapp/views/demo.html`):
+Then in your accompanying view template (`apps/myapp/views/example.html`):
 
 ```html
 <div {{_wire_}}>
@@ -121,6 +121,32 @@ Can be connected like this:
 
 Modifying the list on either the client or the server will update the displayed list of elements.
 
-## Demo
+## Convenience methods
 
-Once you've installed this app, go to `/wires/demo` and log in as a site administrator to see a working demo.
+Wires defines two additional convenience methods for communicating with the server:
+
+* `this.sync()` - Post the component's current state to the server-side handler.
+* `this.send(params)` - Post the specified request data to the server-side handler.
+
+The first serializes and sends the entire component state, while the second only sends
+the specific data that it's given.
+
+These can be used to send the updated component state to the server for storage and
+additional processing after modifying it locally.
+
+Example usage:
+
+```js
+function toDoList() {
+	return Object.assign ({{_wire_data_}}, {
+        toggleToDoCompleted(index) {
+            this.todos[index].completed = !this.todos[index].completed;
+            this.sync(); // Send updated state to the server
+        }
+	});
+}
+```
+
+## Demos
+
+Once you've installed this app, go to `/wires/demo` and log in as a site administrator to see working demos.
