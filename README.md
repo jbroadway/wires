@@ -139,10 +139,10 @@ Example usage:
 ```js
 function toDoList() {
 	return Object.assign ({{_wire_data_}}, {
-        toggleToDoCompleted(index) {
-            this.todos[index].completed = !this.todos[index].completed;
-            this.sync(); // Send updated state to the server
-        }
+		toggleToDoCompleted(index) {
+			this.todos[index].completed = !this.todos[index].completed;
+			this.sync(); // Send updated state to the server
+		}
 	});
 }
 ```
