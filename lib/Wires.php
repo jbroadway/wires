@@ -103,7 +103,9 @@ class Wires {
 	 * the API endpoint handler, depending on how the request was made.
 	 */
 	public static function handle (array $defaults, callable $handler) : string {
-		$params = self::$is_wired ? array_merge ($defaults, self::$controller->get_put_data ()) : $defaults;
+		$params = self::$is_wired
+			? array_merge ($defaults, json_decode (self::$controller->get_put_data (), true))
+			: $defaults;
 		
 		if (self::$is_wired) {
 			$res = $handler ($params);
