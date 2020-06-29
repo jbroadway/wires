@@ -73,8 +73,28 @@ echo Wires::handle ($defaults, function ($response) {
 ```
 
 Behind the scenes, the `<div {{_wire_}}>` connects Alpine.js to the template data.
-Three methods connect buttons, inputs, and links to make API calls to the same
-endpoint:
+
+If you want to define your own functions for use with Alpine.js, you can initialize
+the component like this instead, using the `{{_wire_data_}}` tag:
+
+```html
+<div x-data="myComponent()">
+	<p x-text="name()"></p>
+</div>
+
+<script>
+function myComponent() {
+	return Object.assign ({{_wire_data_}}, {
+		name() {
+			return this.fname + ' ' + this.lname;
+		}
+	});
+}
+</script>
+```
+
+In addition to `{{_wire_}}` and `{{_wire_data_}}`, three custom tags can be used to
+connect buttons, inputs, and links to make API calls to the same endpoint:
 
 * `{{_wire_button_}}` - Wires a `<button>` element, passing its `data-*` attributes to the server.
 * `{{_wire_input_}}` - Wires an `<input>`, `<select>`, or `<textarea>` element to send live updates to the server as you type or make a selection, passing its `name` attribute and value to the server.
