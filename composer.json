@@ -16,6 +16,7 @@
         {"type": "git", "url": "http://github.com/jbroadway/elefant_installer"}
     ],
     "require": {
+	"php": ">=7.4",
         "elefant/app-installer": "*"
     }
 }
