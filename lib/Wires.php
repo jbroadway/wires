@@ -42,22 +42,22 @@
  *     </div>
  */
 class Wires {
-	private static Controller $controller;
+	private static $controller;
 	
-	private static bool $is_wired = false;
+	private static $is_wired = false;
 	
-	private static string $request_uri = '';
+	private static $request_uri = '';
 	
-	private static string $error = '';
+	private static $error = '';
 	
-	private static int $error_code = 0;
+	private static $error_code = 0;
 	
-	private static int $c = 1;
+	private static $c = 1;
 	
 	/**
 	 * Initialize the response settings and inject the controller.
 	 */
-	public static function init (Controller $controller) : void {
+	public static function init ($controller) {
 		self::$controller = $controller;
 		
 		if (isset ($_GET['_wired_']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -72,7 +72,7 @@ class Wires {
 	/**
 	 * Renders the connection logic that wires the template to Alpine.js.
 	 */
-	private static function _setup (array $state) : string {
+	private static function _setup ($state) {
 		$out = self::$controller->template ()->render (
 			'wires/setup',
 			[
@@ -92,7 +92,7 @@ class Wires {
 	 *
 	 *     return Wires::error (500, 'Internal server error');
 	 */
-	public static function error (int $code, string $msg) : bool {
+	public static function error ($code, $msg) {
 		self::$error_code = $code;
 		self::$error = $msg;
 		return false;
@@ -102,7 +102,7 @@ class Wires {
 	 * Use to process and either render the initial HTML response or call
 	 * the API endpoint handler, depending on how the request was made.
 	 */
-	public static function handle (array $defaults, callable $handler) : string {
+	public static function handle ($defaults, $handler) {
 		$params = self::$is_wired
 			? array_merge ($defaults, json_decode (self::$controller->get_put_data (), true))
 			: $defaults;
@@ -128,7 +128,7 @@ class Wires {
 	 * Handles rendering the template with the custom `Wires::filter`
 	 * default filter.
 	 */
-	private static function _render (string $template, array $data) : string {
+	private static function _render ($template, $data) {
 		self::$request_uri = $template;
 
 		self::$controller->template ()->default_filter = 'Wires::filter';
@@ -144,7 +144,7 @@ class Wires {
 	 * A custom template filter for initializing Alpine and connecting
 	 * `{{var}}`-style tags to Alpine tags.
 	 */
-	public static function filter ($val, string $charset, string $label) : string {
+	public static function filter ($val, $charset, $label) {
 		switch ($label) {
 			case '_wire_':
 				return 'x-data="_wire_' . self::$c . '()"';
